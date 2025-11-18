@@ -20,7 +20,9 @@ class LocationAdapter(
             binding.tvLat.text = item.lat.toString()
             binding.tvLon.text = item.lon.toString()
 
-            binding.root.setOnClickListener { onItemClick(item) }
+            binding.tvConsult.setOnClickListener {
+                onItemClick(item)
+            }
 
             binding.btnDelete.setOnClickListener {
                 onDeleteClick(item)

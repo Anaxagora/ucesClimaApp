@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bgLight">
 
     <LinearLayout
         android:orientation="vertical"
@@ -9,92 +11,127 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Back button -->
+        <!-- BOTÓN VOLVER -->
         <Button
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Volver" />
+            android:text="← Volver"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="8dp"
+            android:layout_marginBottom="10dp"/>
 
-        <!-- City title -->
+        <!-- TÍTULO CIUDAD -->
         <TextView
             android:id="@+id/tvCityTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ciudad"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp" />
-
-        <!-- Hour info -->
-        <TextView
-            android:id="@+id/tvHourInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Horario del dato: -"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
-
-        <!-- WEATHER CARD -->
-        <LinearLayout
-            android:orientation="vertical"
-            android:padding="15dp"
-            android:background="#EEEEEE"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="12dp"
-            android:layout_marginBottom="20dp">
+            android:text="Ciudad"
+            android:textSize="30sp"
+            android:textColor="@color/textPrimary"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp"/>
 
-            <TextView
-                android:id="@+id/tvTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Temperatura:" />
+        <!-- HORA -->
+        <TextView
+            android:id="@+id/tvHourInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Horario del dato:"
+            android:textSize="18sp"
+            android:textColor="@color/textSecondary"
+            android:layout_marginBottom="12dp"/>
 
-            <TextView
-                android:id="@+id/tvHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Humedad:" />
+        <!-- TARJETA DEL CLIMA -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:padding="20dp"
 
-            <TextView
-                android:id="@+id/tvWind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Viento:" />
+            android:strokeColor="@color/colorPrimary">
 
-            <TextView
-                android:id="@+id/tvPressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Presión:" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvCloud"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nubosidad:" />
+                <TextView
+                    android:id="@+id/tvTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Temperatura:"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary"
+                    android:layout_marginBottom="14dp"/>
 
-            <TextView
-                android:id="@+id/tvVisibility"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Visibilidad:" />
+                <TextView
+                    android:id="@+id/tvHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humedad:"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"/>
 
-            <TextView
-                android:id="@+id/tvRain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lluvia:" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Viento:"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"/>
 
-        <!-- Go to forecast screen -->
+                <TextView
+                    android:id="@+id/tvPressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Presión:"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvCloud"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nubosidad:"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvVisibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visibilidad:"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvRain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lluvia:"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- BOTÓN PRONÓSTICO -->
         <Button
             android:id="@+id/btnForecast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Pronóstico extendido" />
+            android:text="📅 Pronóstico extendido"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:paddingVertical="12dp"
+            android:layout_marginTop="20dp"/>
     </LinearLayout>
 </ScrollView>

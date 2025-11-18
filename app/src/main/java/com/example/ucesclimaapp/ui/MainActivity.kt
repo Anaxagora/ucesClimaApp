@@ -2,19 +2,21 @@ package com.example.ucesclimaapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ucesclimaapp.WeatherActivity
-import com.example.ucesclimaapp.database.LocationDbHelper
 import com.example.ucesclimaapp.databinding.ActivityMainBinding
 import com.example.ucesclimaapp.model.Location
 import com.example.ucesclimaapp.viewmodel.LocationViewModel
+import com.example.ucesclimaapp.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: LocationViewModel
+    private lateinit var locationViewModel: LocationViewModel
+    private lateinit var weatherViewModel: WeatherViewModel
     private lateinit var adapter: LocationAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,16 +25,29 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[LocationViewModel::class.java]
+        // --------------------------
+        // 🟦 Inicializo ambos ViewModels
+        // --------------------------
+        locationViewModel = ViewModelProvider(this)[LocationViewModel::class.java]
+        weatherViewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
 
         setupRecycler()
 
-        viewModel.locationsLiveData.observe(this) { list ->
+        // --------------------------
+        // 🟦 Observa cambios en la base local
+        // --------------------------
+        locationViewModel.locationsLiveData.observe(this) { list ->
             adapter.updateList(list)
         }
 
-        viewModel.loadLocations()
+        // --------------------------
+        // 🟦 Cargar ciudades guardadas
+        // --------------------------
+        locationViewModel.loadLocations()
 
+        // --------------------------
+        // 🟦 Botón para guardar ciudad
+        // --------------------------
         binding.btnSave.setOnClickListener {
             saveLocation()
         }
@@ -42,20 +57,46 @@ class MainActivity : AppCompatActivity() {
         adapter = LocationAdapter(
             emptyList(),
             onItemClick = { location ->
-                val intent = Intent(this, WeatherActivity::class.java)
-                intent.putExtra("city", location.city)
-                intent.putExtra("lat", location.lat)
-                intent.putExtra("lon", location.lon)
-                startActivity(intent)
+
+                // --------------------------
+                // 🟦 Probar primero si la API responde
+                // --------------------------
+                weatherViewModel.testWeather(
+                    apiKey = "d3bfcf12-bf51-11f0-a0d3-0242ac130003-d3bfcfda-bf51-11f0-a0d3-0242ac130003",
+                    lat = location.lat,
+                    lon = location.lon
+                ) { success: Boolean ->
+
+                    if (success) {
+                        // ✔ Si la API funciona → pasar a WeatherActivity
+                        val intent = Intent(this, WeatherActivity::class.java)
+                        intent.putExtra("city", location.city)
+                        intent.putExtra("lat", location.lat)
+                        intent.putExtra("lon", location.lon)
+                        startActivity(intent)
+
+                    } else {
+                        // ❌ Error en la API → no avanzar
+                        Toast.makeText(
+                            this,
+                            "No se pudo obtener información del clima. Intente más tarde.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
             },
+
+            // --------------------------
+            // 🟦 Eliminar ciudad
+            // --------------------------
             onDeleteClick = { location ->
-                viewModel.deleteLocation(location)
+                locationViewModel.deleteLocation(location)
             }
         )
+
         binding.rvLocations.layoutManager = LinearLayoutManager(this)
         binding.rvLocations.adapter = adapter
     }
-
 
     private fun saveLocation() {
         val city = binding.etCityName.text.toString()
@@ -65,8 +106,9 @@ class MainActivity : AppCompatActivity() {
         if (city.isBlank() || lat == null || lon == null) return
 
         val location = Location(city = city, lat = lat, lon = lon)
-        viewModel.addLocation(location)
+        locationViewModel.addLocation(location)
 
+        // Limpiar inputs
         binding.etCityName.text.clear()
         binding.etLatitude.text.clear()
         binding.etLongitude.text.clear()

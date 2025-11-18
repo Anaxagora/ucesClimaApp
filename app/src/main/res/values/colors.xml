@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#4FC3F7</color> <!-- Celestito -->
+    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorAccent">#FFA726</color> <!-- Naranja suave -->
+
+    <color name="bgLight">#E3F2FD</color>  <!-- Fondo clarito -->
+    <color name="bgCard">#FFFFFF</color>  <!-- Fondos de cards -->
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#616161</color>
 </resources>

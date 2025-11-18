@@ -22,4 +22,17 @@ class WeatherViewModel : ViewModel() {
             }
         }
     }
+
+    fun testWeather(apiKey: String, lat: Double, lon: Double, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.api.getWeather(apiKey, lat, lon)
+                onResult(true)   // éxito
+            } catch (e: Exception) {
+                onResult(false)  // error
+            }
+        }
+    }
+
 }
+

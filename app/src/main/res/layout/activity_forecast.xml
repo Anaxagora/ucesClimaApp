@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/bgLight">
 
+    <!-- BOTÓN VOLVER -->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver" />
+        android:text="← Volver"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="8dp"
+        android:layout_marginBottom="20dp"/>
 
+    <!-- TÍTULO -->
+    <TextView
+        android:id="@+id/tvForecastTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📅 Pronóstico Extendido"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/textPrimary"
+        android:layout_marginBottom="15dp"/>
+
+    <!-- ERROR -->
     <TextView
         android:id="@+id/tvError"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#B00020"
-        android:layout_marginTop="10dp" />
+        android:textColor="#D32F2F"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:text="Error al obtener datos"
+        android:layout_marginBottom="10dp"/>
 
+    <!-- LISTA -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerForecast"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"/>
+        android:paddingBottom="10dp"/>
 </LinearLayout>
