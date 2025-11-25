@@ -48,7 +48,7 @@ class WeatherActivity : AppCompatActivity() {
 
         // ---- LLAMADA REAL A LA API ----
         viewModel.loadWeather(
-            apiKey = "d3bfcf12-bf51-11f0-a0d3-0242ac130003-d3bfcfda-bf51-11f0-a0d3-0242ac130003",
+            apiKey = Constants.API_KEY,
             lat = lat,
             lon = lon
         )
@@ -60,7 +60,7 @@ class WeatherActivity : AppCompatActivity() {
             intent.putExtra("lat", lat)
             intent.putExtra("lon", lon)
             intent.putExtra("city", city)
-            intent.putExtra("apiKey", "d3bfcf12-bf51-11f0-a0d3-0242ac130003-d3bfcfda-bf51-11f0-a0d3-0242ac130003")
+            intent.putExtra("apiKey", Constants.API_KEY)
             startActivity(intent)
         }
     }
